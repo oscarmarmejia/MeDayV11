@@ -1,23 +1,30 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:medayv11/Constants.dart';
 import 'package:medayv11/Models/Product.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import 'package:firebase_core/firebase_core.dart';
 import '../Components/ProductImage.dart';
-
+import 'dart:math';
+import 'package:favorite_button/favorite_button.dart';
 
 class BodyCard extends StatelessWidget {
+
 
 
   final Product product;
 
 
 
+
   const BodyCard({Key? key, required this. product}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+
+
     Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Column(
@@ -25,6 +32,7 @@ class BodyCard extends StatelessWidget {
                  SizedBox(
                    height: size.height * 0.8,
                    child: Stack(
+                     fit: StackFit.loose,
                      children: <Widget>[
                        Container(
                          margin: EdgeInsets.only(top: size.height * 0.3 ),
@@ -40,26 +48,58 @@ class BodyCard extends StatelessWidget {
                             child: Column(
                                 children: <Widget>[
                                     Description(product: product),
-                                    Container(
-                                      padding: EdgeInsets.all(8),
-                                      height: 32,
-                                      width: 32,
-                                      constraints: BoxConstraints.tightForFinite( height: 250),
-                                      decoration: BoxDecoration(color: Colors.pink, shape: BoxShape.circle),
-                                              child: SvgPicture.asset("assets/icons/heart.svg") ,
-                      ),
+
                     ],
                   ),
                 ),
-                                    Container(
+
+                                    Positioned(
+                                        bottom: 160,
+                                        right: 40,
+                                        left: 40,
+
+                                        child:
+
+                                    Center(
+
+                                        child:FavoriteButton(
+
+                                          isFavorite: true,
+
+
+                                          // iconDisabledColor: Colors.white,
+                                          valueChanged: (_isFavorite) {
+                                            DatabaseReference prueba = FirebaseDatabase.instance.reference().child("test2");
+                                           if(_isFavorite){
+                                             prueba.set(true);
+                                           }
+                                           else{
+                                             prueba.set(false);
+                                           }
+
+
+                                            print('Is Favorite : $_isFavorite');
+                                          },
+                                        ),
+
+                                    )),
+                                      /*
+                                      Container(
                                         alignment: Alignment.bottomCenter,
                                         constraints: BoxConstraints.tightForFinite(width: 800, height: 600),
                                           child: RatingBar.builder(
                                               minRating: 1, itemBuilder: (context, _) => Icon(Icons.star, color: Colors.amber), onRatingUpdate: (rating){})
 
-                ),                    Positioned(
+                ),
+                */
+
+
+
+
+
+                       Positioned(
                                         left: MediaQuery.of(context).size.width/6,
-                                        top: MediaQuery.of(context).size.height/2.4,
+                                        top: MediaQuery.of(context).size.height/1.7,
                                         child: Container(
                                             alignment: Alignment.center,
                                             padding: EdgeInsets.all(50),
@@ -89,7 +129,7 @@ class BodyCard extends StatelessWidget {
                     ),
                   ),
                 ),
-               ProductImage(product: product),
+                      ProductImage(product: product),
               ],
             ),
           )

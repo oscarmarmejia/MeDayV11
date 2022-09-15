@@ -4,6 +4,8 @@ import 'package:medayv11/Models/Product.dart';
 import 'package:medayv11/Screens/Components/item_card.dart';
 import 'package:medayv11/Screens/Details/details_screen.dart';
 
+import '../Details/details_item.dart';
+
 
 
 
@@ -29,6 +31,7 @@ class Body extends StatelessWidget {
             itemBuilder: (context, index)=> ItemCard( product : products[index],
                 press: () => Navigator.push(context, MaterialPageRoute(
                     builder: (context)=> DetailScreen(product: products[index])))),),)
+
 
       ],
     );

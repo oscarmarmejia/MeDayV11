@@ -3,7 +3,11 @@ import 'dart:math';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:medayv11/Models/Product.dart';
 import 'package:medayv11/Screens/home_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+
 
 Future<void> main() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -53,9 +57,9 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+   MyHomePage({Key? key, required this.title}) : super(key: key);
 
-
+final CollectionReference productos = FirebaseFirestore.instance.collection('productos');
 
   final String title;
 
