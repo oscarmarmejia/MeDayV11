@@ -6,14 +6,69 @@ import 'package:flutter/material.dart';
 import 'package:medayv11/Models/Product.dart';
 import 'package:medayv11/Screens/home_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:medayv11/Screens/test_login.dart';
 
 
 Future<void> main() async {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp();
-    runApp( MyApp());
+   // runApp( MyApp());
+   runApp( LoginTest());
 }
+
+class GoogleSignInApp extends StatefulWidget {
+  const GoogleSignInApp({Key? key}) : super(key: key);
+
+  @override
+  State<GoogleSignInApp> createState() => _GoogleSignInAppState();
+}
+
+class _GoogleSignInAppState extends State<GoogleSignInApp> {
+
+  GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ["email"]);
+  @override
+  Widget build(BuildContext context) {
+    GoogleSignInAccount? user = _googleSignIn.currentUser;
+
+    return MaterialApp(
+      home:Scaffold(
+        appBar:  AppBar(title: Text('Google Sign In (Sign '+ (user == null  ?  'out': 'in' ) + ")" ),
+
+      ),
+        body:  Center(
+          child: Column(
+            children: [
+              ElevatedButton(child: Text("Sign in") ,onPressed:  user != null ? null :() async {
+                await _googleSignIn.signIn();
+
+               Navigator.push(context, MaterialPageRoute(builder: (context) => MyApp()));
+
+              } ),
+              ElevatedButton(child: Text("Sign out"), onPressed: user == null ? null :() async{
+                await _googleSignIn.signOut();
+                setState(() {
+
+                });
+
+              }),
+            ElevatedButton(onPressed: (){}, child: Text('Welcome '+ (user == null  ?  'out': user.displayName.toString() ) )),
+
+
+
+            ],
+
+          ),
+
+        ),
+
+    )
+    );
+  }
+}
+
+
+
 
 class MyApp extends StatelessWidget {
   final Future<FirebaseApp> _fbApp= Firebase.initializeApp();

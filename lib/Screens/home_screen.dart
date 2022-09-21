@@ -2,14 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:medayv11/Constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:medayv11/Screens/Components/body.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:medayv11/main.dart';
 
 import '../Models/Product.dart';
+import 'favorites_list.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ["email"]);
+
+  int currentIndex = 0;
+  final screens = [
+    HomeScreen(),
+    Favorites(),
+    MyApp()
+
+
+
+
+  ];
 
   @override
 Widget build(BuildContext context) {
-
+    GoogleSignInAccount? user = _googleSignIn.currentUser;
   return Scaffold(
           appBar: PreferredSize(
                   preferredSize: Size.fromHeight(80.0),
@@ -45,42 +65,44 @@ Widget build(BuildContext context) {
                             ),
                               ),
     body: Body(),
-    bottomNavigationBar: NavigationBar(
-                        backgroundColor: lenaColor,
-                        destinations: [
-                                        NavigationDestination(
-                                                              label: "Home",
-                                                               icon: Icon(
-                                                                    Icons.home,
-                                                                   color: lenaColor2
-                                                                          ),
-                                                              ),
-                                         NavigationDestination(
-                                                              label: "saved",
-                                                              icon: Icon(
-                                                                Icons.favorite,
-                                                                color: lenaColor2,
-                                                                         )
-                                                               ),
-                                        NavigationDestination(
-                                                              label: "search",
-                                                              icon: Icon(
-                                                                Icons.search,
-                                                                color: lenaColor2,
-                                                                        )
-                                                              ),
-                                        NavigationDestination(
-                                                              label: "more",
-                                                              icon: Icon(
-                                                                Icons.more_horiz,
-                                                                color: lenaColor2,
-                                                                        )
-                                                             ),
-                                      ],
+
+    bottomNavigationBar: BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+     iconSize: 37,
+
+   unselectedItemColor: Colors.white24,
+     selectedFontSize: 18,
+     unselectedFontSize: 12,
+     selectedItemColor: lenaColor2,
+      currentIndex: currentIndex,
+      onTap: (index) => setState(() => currentIndex = index),
+
+                        backgroundColor: lenaColor, items: [
+                                                        BottomNavigationBarItem(
+                                                          label: "Home",
+                                                          icon: Icon(
+                                                            Icons.home,
+
+                                                        ),),
+      BottomNavigationBarItem(  label: "favorite", icon: Icon(
+          Icons.favorite,
+
+      ),),
+      BottomNavigationBarItem(  label: "Exit", icon: Icon(
+          Icons.exit_to_app,
+      ),),
+
+
+    ],
+
                                       ),
                   );
                                   }
 }
+
+
+
+
 
 class MySearchDelegate extends SearchDelegate {
   List<String> searchTerms = [
@@ -267,4 +289,78 @@ class MySearchDelegate extends SearchDelegate {
   }
 }
 
+/*
+class BarraAbajo extends StatefulWidget {
+  const BarraAbajo({Key? key}) : super(key: key);
 
+  @override
+  State<BarraAbajo> createState() => _BarraAbajoState();
+}
+
+class _BarraAbajoState extends State<BarraAbajo> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+
+      bottomNavigationBar:BottomNavigationBar(
+        backgroundColor: lenaColor, items: [
+        BottomNavigationBarItem(
+          label: "Home",
+          icon: Icon(color: lenaColor2,
+            Icons.home,
+
+          ),),
+        BottomNavigationBarItem(  label: "favorite", icon: Icon(color: lenaColor2,
+          Icons.favorite,
+
+        ),),
+        BottomNavigationBarItem(  label: "Exit", icon: Icon(color: lenaColor2,
+          Icons.exit_to_app,
+        ),),
+
+
+      ],
+        /*  destinations: [
+
+                                        NavigationDestination(
+
+                                                              label: "Home",
+                                                               icon: Icon(
+                                                                    Icons.home,
+                                                                   color: lenaColor2
+                                                                          ),
+                                                              ),
+                                         NavigationDestination(
+                                                              label: "saved",
+                                                              icon: Icon(
+                                                                Icons.favorite,
+                                                                color: lenaColor2,
+                                                                         )
+                                                               ),
+                                        NavigationDestination(
+                                                              label: "search",
+                                                              icon: Icon(
+                                                                Icons.search,
+                                                                color: lenaColor2,
+                                                                        )
+                                                              ),
+                                        NavigationDestination(
+
+                                                              label: "more",
+                                                              icon: Icon(
+                                                                Icons.more_horiz,
+                                                                color: lenaColor2,
+                                                                        )
+                                                             ),
+
+                          \
+                                      ], */
+      ),
+    );
+  }
+}
+
+
+
+
+ */
