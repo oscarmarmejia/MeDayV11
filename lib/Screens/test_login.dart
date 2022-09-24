@@ -11,6 +11,7 @@ import 'package:medayv11/Screens/home_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:medayv11/Screens/test_login.dart';
+import 'package:medayv11/main.dart';
 
 
 
@@ -43,7 +44,7 @@ class FirstScreen extends StatelessWidget {
 
             await _googleSignIn.signIn();
   Navigator.push(context, MaterialPageRoute(
-      builder: (context) => TestLogout())); // el bueno
+      builder: (context) => MyApp())); // el bueno
    }
         ),
 

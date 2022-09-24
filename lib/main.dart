@@ -3,18 +3,21 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:medayv11/Last/main_screen.dart';
 import 'package:medayv11/Models/Product.dart';
 import 'package:medayv11/Screens/home_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:medayv11/Screens/test_login.dart';
 
+import 'Screens/favorites_list.dart';
+
 
 Future<void> main() async {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp();
    // runApp( MyApp());
-   runApp( LoginTest());
+   runApp( MyApp());
 }
 
 class GoogleSignInApp extends StatefulWidget {
@@ -75,7 +78,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+
+      title: 'My Day',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -97,7 +102,7 @@ class MyApp extends StatelessWidget {
                                                               "someting is wrong");
                                            }
                                           else if (snapshot.hasData){
-                                                      return HomeScreen();
+                                                      return Favorites();
                                                       //return MyHomePage(title: "test");
                                            }
                                           else{

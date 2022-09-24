@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:medayv11/Constants.dart';
@@ -11,7 +12,7 @@ import '../Components/ProductImage.dart';
 import 'dart:math';
 import 'package:favorite_button/favorite_button.dart';
 
-class BodyCard extends StatelessWidget {
+class BodyCard extends StatefulWidget {
 
 
 
@@ -20,9 +21,18 @@ class BodyCard extends StatelessWidget {
 
 
 
+
   const BodyCard({Key? key, required this. product}) : super(key: key);
+
+  @override
+  State<BodyCard> createState() => _BodyCardState();
+}
+
+class _BodyCardState extends State<BodyCard> {
   @override
   Widget build(BuildContext context) {
+    DatabaseReference refe =  FirebaseDatabase.instance.ref('test2');
+    late DatabaseReference restt;
 
 
     Size size = MediaQuery.of(context).size;
@@ -34,6 +44,7 @@ class BodyCard extends StatelessWidget {
                    child: Stack(
                      fit: StackFit.loose,
                      children: <Widget>[
+
                        Container(
                          margin: EdgeInsets.only(top: size.height * 0.3 ),
                          padding: EdgeInsets.only(top: size.height * 0.01, left: kDefaultPaddin, right: kDefaultPaddin),
@@ -47,7 +58,7 @@ class BodyCard extends StatelessWidget {
                   ),
                             child: Column(
                                 children: <Widget>[
-                                    Description(product: product),
+                                    Description(product: widget.product),
 
                     ],
                   ),
@@ -62,25 +73,26 @@ class BodyCard extends StatelessWidget {
 
                                     Center(
 
+
                                         child:FavoriteButton(
 
-                                          isFavorite: true,
-
-
                                           // iconDisabledColor: Colors.white,
-                                          valueChanged: (_isFavorite) {
+                                          valueChanged: (data) {
                                             DatabaseReference prueba = FirebaseDatabase.instance.reference().child("test2");
-                                           if(_isFavorite){
+                                           if(data){
                                              prueba.set(true);
                                            }
                                            else{
                                              prueba.set(false);
+
                                            }
 
 
-                                            print('Is Favorite : $_isFavorite');
+                                            print('Is Favorite : $data');
                                           },
                                         ),
+
+
 
                                     )),
                                       /*
@@ -118,7 +130,7 @@ class BodyCard extends StatelessWidget {
 
                       onPressed: () async =>{
 
-                        await launch(product.url)
+                        await launch(widget.product.url)
 
                       },
 
@@ -129,7 +141,7 @@ class BodyCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                      ProductImage(product: product),
+                      ProductImage(product: widget.product),
               ],
             ),
           )

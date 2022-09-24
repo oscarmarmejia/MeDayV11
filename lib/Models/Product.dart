@@ -21,7 +21,7 @@ class Product {
 
 List<Product> products = [
   Product(
-    favorite: false,
+    favorite: true,
     id: 1,
     title: "Arbys",
     price: 234,

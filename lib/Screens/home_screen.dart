@@ -3,6 +3,7 @@ import 'package:medayv11/Constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:medayv11/Screens/Components/body.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:medayv11/Screens/test_login.dart';
 import 'package:medayv11/main.dart';
 
 import '../Models/Product.dart';
@@ -18,9 +19,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int currentIndex = 0;
   final screens = [
-    HomeScreen(),
+   Body(),
     Favorites(),
-    MyApp()
+    LoginTest()
 
 
 
@@ -64,7 +65,7 @@ Widget build(BuildContext context) {
                   ],
                             ),
                               ),
-    body: Body(),
+    body: screens[currentIndex],
 
     bottomNavigationBar: BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
@@ -364,3 +365,20 @@ class _BarraAbajoState extends State<BarraAbajo> {
 
 
  */
+
+class Salida extends StatelessWidget {
+  GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ["email"]);
+   Salida({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    GoogleSignInAccount? user = _googleSignIn.currentUser;
+    return TextButton(onPressed: () async{
+
+      await _googleSignIn.signOut();
+
+
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginTest()));
+    }, child:Container(),);
+  }
+}

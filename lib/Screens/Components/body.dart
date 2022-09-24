@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:medayv11/Constants.dart';
 import 'package:medayv11/Models/Product.dart';
+import 'package:medayv11/Screens/Components/categories.dart';
 import 'package:medayv11/Screens/Components/item_card.dart';
 import 'package:medayv11/Screens/Details/details_screen.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:medayv11/Screens/test_login.dart';
 import '../Details/details_item.dart';
 import 'package:medayv11/main.dart';
 
@@ -19,12 +21,15 @@ class Body extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-     
+
         SizedBox(height: 10,),
+        /*
         FloatingActionButton(onPressed: () async{
           await _googleSignIn.signOut();
-          Navigator.push(context, MaterialPageRoute(builder: (context) => GoogleSignInApp()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => LoginTest()));
         }),
+
+         */
         Expanded(
           child: GridView.builder(
             itemCount: products.length,
@@ -36,9 +41,29 @@ class Body extends StatelessWidget {
 
 
             itemBuilder: (context, index)=> ItemCard( product : products[index],
-                press: () => Navigator.push(context, MaterialPageRoute(
 
-                   builder: (context)=> DetailScreen(product: products[index])))),),)
+/*
+            press: () => Navigator.push(
+              context, PageRouteBuilder(transitionDuration: Duration(milliseconds: 1500),
+                pageBuilder: (context, animation, animationTime ) =>
+                    DetailScreen(product: products[index]),
+              transitionsBuilder: (context, animation, animationTime, child){
+                animation = CurvedAnimation(parent: animation, curve: );
+                return ScaleTransition(scale: animation, alignment: Alignment.center, child: child,);
+
+              }
+
+            )
+            )) ),),
+
+
+
+ */
+
+                press: () => Navigator.of(context).push(CustomPageRoute(DetailScreen(product: products[index])))
+                   )
+            ,)
+          ,)
 
 
       ],
@@ -119,3 +144,67 @@ class _BarraAbajoState extends State<BarraAbajo> {
 
  */
 
+class _TransitionListTile extends StatelessWidget {
+  const _TransitionListTile({
+    this.onTap,
+    required this.title,
+    required this.subtitle,
+  });
+
+  final GestureTapCallback? onTap;
+  final String title;
+  final String subtitle;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      contentPadding: const EdgeInsets.symmetric(
+        horizontal: 15.0,
+      ),
+      leading: Container(
+        width: 40.0,
+        height: 40.0,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20.0),
+          border: Border.all(
+            color: Colors.black54,
+          ),
+        ),
+        child: const Icon(
+          Icons.play_arrow,
+          size: 35,
+        ),
+      ),
+      onTap: onTap,
+      title: Text(title),
+      subtitle: Text(subtitle),
+    );
+  }
+}
+
+class CustomPageRoute<T> extends PageRoute<T> {
+  CustomPageRoute(this.child);
+  @override
+  // TODO: implement barrierColor
+  Color get barrierColor => Colors.white;
+
+  @override
+  String? get barrierLabel => null;
+
+  final Widget child;
+
+  @override
+  Widget buildPage(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation) {
+    return FadeTransition(
+      opacity: animation,
+      child: child,
+    );
+  }
+
+  @override
+  bool get maintainState => true;
+
+  @override
+  Duration get transitionDuration => Duration(milliseconds: 1000);
+}
