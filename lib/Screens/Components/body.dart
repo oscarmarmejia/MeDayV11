@@ -6,6 +6,7 @@ import 'package:medayv11/Screens/Components/item_card.dart';
 import 'package:medayv11/Screens/Details/details_screen.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:medayv11/Screens/test_login.dart';
+import '../../Last/favorite_last.dart';
 import '../Details/details_item.dart';
 import 'package:medayv11/main.dart';
 
@@ -59,8 +60,8 @@ class Body extends StatelessWidget {
 
 
  */
-
-                press: () => Navigator.of(context).push(CustomPageRoute(DetailScreen(product: products[index])))
+    press: () => Navigator.of(context).push(CustomPageRoute(FavoriteLast(product: products[index])))
+               // press: () => Navigator.of(context).push(CustomPageRoute(DetailScreen(product: products[index])))
                    )
             ,)
           ,)

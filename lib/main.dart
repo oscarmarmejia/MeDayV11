@@ -10,6 +10,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:medayv11/Screens/test_login.dart';
 
+import 'Last/favorite_last.dart';
 import 'Screens/favorites_list.dart';
 
 
@@ -102,7 +103,7 @@ class MyApp extends StatelessWidget {
                                                               "someting is wrong");
                                            }
                                           else if (snapshot.hasData){
-                                                      return Favorites();
+                                                      return HomeScreen();
                                                       //return MyHomePage(title: "test");
                                            }
                                           else{
