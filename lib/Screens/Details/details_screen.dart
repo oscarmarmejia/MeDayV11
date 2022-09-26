@@ -31,6 +31,7 @@ class DetailScreen extends StatelessWidget {
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       backgroundColor:  Colors.transparent,
+
       elevation: 0,
       leading: IconButton(icon: SvgPicture.asset(
         'assets/icons/back.svg', color: Colors.white,),

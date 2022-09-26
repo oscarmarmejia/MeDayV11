@@ -16,17 +16,7 @@ class _FavoritesState extends State<Favorites> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: TextField(controller: controller),
-      actions: [
-        IconButton(onPressed: (){
-          final name = controller.text;
-          createUser(name : name);
-
-        }, icon: Icon(Icons.add))
-      ],
-
-      ),
+backgroundColor: Colors.orangeAccent,
       body:
 
       StreamBuilder<List<User>>(
@@ -45,7 +35,7 @@ class _FavoritesState extends State<Favorites> {
             children: [
               Container(
                 width: 400,
-                height: 400,
+                height: 569,
                 child: ListView(
                     children: users.map(buildUser).toList()
                   ),
@@ -78,8 +68,11 @@ Widget buildUser(User user) => ListTile(
     isFavorite: ( user.favorite)  ,
     // iconDisabledColor: Colors.white,
     valueChanged: (_isFavorite) {
-      final docUser = FirebaseFirestore.instance.collection('user').doc('my-id');
+      final docUser2 = FirebaseFirestore.instance.collection('favoritos').doc('${user.id}');
+
+      final docUser = FirebaseFirestore.instance.collection('user').doc('${user.id}');
       if(user.favorite){
+        docUser2.delete();
 docUser.update({
   'name' : 'prueba1',
   'favorite' : false,
@@ -112,11 +105,11 @@ docUser.update({
 
 
 
-  Stream<List<User>> readUsers() => FirebaseFirestore.instance.collection('user').snapshots().map((snapshot) => snapshot.docs.map((doc) => User.fromJson(doc.data())).toList());
+  Stream<List<User>> readUsers() => FirebaseFirestore.instance.collection('favoritos').snapshots().map((snapshot) => snapshot.docs.map((doc) => User.fromJson(doc.data())).toList());
 
   Future createUser({required String name}) async{
     
-    final docUser = FirebaseFirestore.instance.collection('user').doc();
+    final docUser = FirebaseFirestore.instance.collection('user').doc('2');
 
     final json = {
       "id" : docUser.id,

@@ -22,7 +22,7 @@ class Product {
 List<Product> products = [
   Product(
     favorite: true,
-    id: 1,
+    id: 0,
     title: "Arbys",
     price: 234,
     size: 12,
@@ -32,7 +32,7 @@ List<Product> products = [
     url:'https://www.arbys.com/deals/',),
   Product(
     favorite: false,
-    id: 2,
+    id: 1,
     title: "Red Lobster",
     price: 234,
     size: 8,
@@ -42,8 +42,8 @@ List<Product> products = [
     url: 'https://www.redlobster.com/rewards',),
   Product(
     favorite: false,
-    id: 3,
-    title: "H",
+    id: 2,
+    title: "Red Robin",
     price: 234,
     size: 10,
     description: dummyText,
@@ -52,8 +52,8 @@ List<Product> products = [
     url: "https://www.redrobin.com/rewards",),
   Product(
       favorite: false,
-      id: 4,
-      title: "O",
+      id: 3,
+      title: "Applebee's",
       price: 234,
       size: 11,
       description: dummyText,
@@ -62,8 +62,8 @@ List<Product> products = [
       url: "https://www.applebees.com/en/sign-up"),
   Product(
       favorite: false,
-      id: 5,
-      title: "O",
+      id: 4,
+      title: "Au Bon Pain",
       price: 234,
       size: 12,
       description: dummyText,
@@ -72,8 +72,8 @@ List<Product> products = [
       url: "http://aubonpain.fbmta.com/members/UpdateProfile.aspx?Action=Subscribe&_Theme=21474836609&inputsource=w"),
   Product(
       favorite: false,
-      id: 6,
-      title: "O",
+      id: 5,
+      title: "Baja Fresh",
       price: 234,
       size: 12,
       description: dummyText,
@@ -83,8 +83,8 @@ List<Product> products = [
   ),
   Product(
       favorite: false,
-      id: 7,
-      title: "Of",
+      id: 6,
+      title: "Johnny Rockets",
       price: 234,
       size: 12,
       description: dummyText,
@@ -94,8 +94,8 @@ List<Product> products = [
   ),
   Product(
       favorite: false,
-      id: 8,
-      title: "C",
+      id: 7,
+      title: "The Noodle Company",
       price: 234,
       size: 12,
       description: dummyText,
@@ -105,8 +105,8 @@ List<Product> products = [
   ),
   Product(
       favorite: false,
-      id: 9,
-      title: "O",
+      id: 8,
+      title: "Au BOn Pain",
       price: 234,
       size: 12,
       description: dummyText,
@@ -116,8 +116,8 @@ List<Product> products = [
   ),
   Product(
       favorite: false,
-      id: 10,
-      title: "Office Code",
+      id: 9,
+      title: "Papa Gino's",
       price: 234,
       size: 12,
       description: dummyText,
