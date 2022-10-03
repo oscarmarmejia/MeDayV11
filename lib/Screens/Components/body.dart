@@ -60,7 +60,7 @@ class Body extends StatelessWidget {
 
 
  */
-    press: () => Navigator.of(context).push(CustomPageRoute(FavoriteLast(product: products[index])))
+                  press: () => Navigator.of(context).push(CustomPageRoute(FavoriteLast(product: products[index])))
                // press: () => Navigator.of(context).push(CustomPageRoute(DetailScreen(product: products[index])))
                    )
             ,)

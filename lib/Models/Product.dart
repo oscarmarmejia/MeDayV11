@@ -27,7 +27,7 @@ List<Product> products = [
     price: 234,
     size: 12,
     description: dummyText,
-    image: "assets/images/rest1.png",
+    image: "assets/images/rest0.png",
     color: Color(0xFF3D82AE),
     url:'https://www.arbys.com/deals/',),
   Product(
@@ -37,7 +37,7 @@ List<Product> products = [
     price: 234,
     size: 8,
     description: dummyText,
-    image: "assets/images/rest11.png",
+    image: "assets/images/rest1.png",
     color: Color(0xFFD3A984),
     url: 'https://www.redlobster.com/rewards',),
   Product(
@@ -47,7 +47,7 @@ List<Product> products = [
     price: 234,
     size: 10,
     description: dummyText,
-    image: "assets/images/rest12.png",
+    image: "assets/images/rest2.png",
     color: Color(0xFF989493),
     url: "https://www.redrobin.com/rewards",),
   Product(
@@ -57,7 +57,7 @@ List<Product> products = [
       price: 234,
       size: 11,
       description: dummyText,
-      image: "assets/images/rest4.png",
+      image: "assets/images/rest3.png",
       color: Color(0xFFE6B398),
       url: "https://www.applebees.com/en/sign-up"),
   Product(
@@ -67,7 +67,7 @@ List<Product> products = [
       price: 234,
       size: 12,
       description: dummyText,
-      image: "assets/images/rest5.png",
+      image: "assets/images/rest4.png",
       color: Color(0xFFFB7883),
       url: "http://aubonpain.fbmta.com/members/UpdateProfile.aspx?Action=Subscribe&_Theme=21474836609&inputsource=w"),
   Product(
@@ -77,7 +77,7 @@ List<Product> products = [
       price: 234,
       size: 12,
       description: dummyText,
-      image: "assets/images/rest6.png",
+      image: "assets/images/rest5.png",
       color: Color(0xFFAEAEAE),
       url: "https://www.bajafresh.com/clubbaja/"
   ),
@@ -88,7 +88,7 @@ List<Product> products = [
       price: 234,
       size: 12,
       description: dummyText,
-      image: "assets/images/rest7.png",
+      image: "assets/images/rest6.png",
       color: Color(0xFFD3A984),
       url: "https://www.johnnyrockets.com/promotions/rocket-eclub"
   ),
@@ -99,7 +99,7 @@ List<Product> products = [
       price: 234,
       size: 12,
       description: dummyText,
-      image: "assets/images/rest8.png",
+      image: "assets/images/rest7.png",
       color: Color(0xFFAEAEAE),
       url: "https://www.noodles.com/rewards/"
   ),
@@ -110,7 +110,7 @@ List<Product> products = [
       price: 234,
       size: 12,
       description: dummyText,
-      image: "assets/images/rest5.png",
+      image: "assets/images/rest8.png",
       color: Color(0xFF3D82AE),
       url: "http://aubonpain.fbmta.com/members/UpdateProfile.aspx?Action=Subscribe&_Theme=21474836609&inputsource=w"
   ),
@@ -121,7 +121,7 @@ List<Product> products = [
       price: 234,
       size: 12,
       description: dummyText,
-      image: "assets/images/rest10.png",
+      image: "assets/images/rest9.png",
       color: Color(0xFFD3A984),
       url: "https://www.papaginos.com/rewards"
   ),

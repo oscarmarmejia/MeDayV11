@@ -76,7 +76,7 @@ Widget build(BuildContext context) {
                                                             Icons.home,
 
                                                         ),),
-      BottomNavigationBarItem(  label: "favorite", icon: Icon(
+      BottomNavigationBarItem(  label: "Favorites", icon: Icon(
           Icons.favorite,
 
       ),),

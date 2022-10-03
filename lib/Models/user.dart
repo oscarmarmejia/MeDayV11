@@ -7,12 +7,14 @@ class User{
   final DateTime birthday;
   final bool favorite;
 
+
   User({
 this.id = '',
 required this.name,
 required this.age,
 required this.birthday,
     required this.favorite,
+
 
 });
 
@@ -33,7 +35,8 @@ id: json['id'],
 name : json['name'],
     age : json['age'],
     birthday: (json['birthday'] as Timestamp).toDate(),
-    favorite: json['favorite']
+    favorite: json['favorite'],
+
 
 
 

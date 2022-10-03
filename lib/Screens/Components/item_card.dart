@@ -1,9 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:medayv11/Constants.dart';
 import 'package:medayv11/Models/Product.dart';
+import 'package:favorite_button/favorite_button.dart';
 
 
-class ItemCard extends StatelessWidget {
+class ItemCard extends StatefulWidget {
   final Product product;
   final VoidCallback press;
   const ItemCard({
@@ -11,9 +14,16 @@ class ItemCard extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<ItemCard> createState() => _ItemCardState();
+}
+
+class _ItemCardState extends State<ItemCard> {
+  @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    Stream<QuerySnapshot> users = FirebaseFirestore.instance.collection('user').snapshots();
     return GestureDetector(
-      onTap: press,
+      onTap: widget.press,
       child: Column(
         children: <Widget> [
           Expanded(
@@ -21,9 +31,9 @@ class ItemCard extends StatelessWidget {
               padding: EdgeInsets.all(kDefaultPaddin),
               height: 180,
               width: 160,
-              decoration: BoxDecoration(color: product.color, borderRadius: BorderRadius.circular(16),
+              decoration: BoxDecoration(color: widget.product.color, borderRadius: BorderRadius.circular(16),
               ),
-              child: Image.asset(product.image)
+              child: Image.asset(widget.product.image)
               ,),
           ),
           Padding(
@@ -31,9 +41,75 @@ class ItemCard extends StatelessWidget {
 
           ),
           Text(
-            "${product.title}", style: TextStyle(fontWeight: FontWeight.bold),)
+            "${widget.product.title}", style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          StreamBuilder<QuerySnapshot>(stream: users, builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot,){
+
+            if(snapshot.hasError){
+              return Text('Something is wrong');
+            }
+            else if(snapshot.connectionState == ConnectionState.waiting){
+              return Text("loading");
+            }
+
+            final data = snapshot.requireData;
+            return Column(
+
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SizedBox(height: size.height* 0.05,
+                  child: FavoriteButton(
+
+
+                    isFavorite: data.docs[widget.product.id]['favorite'],
+
+
+
+                    valueChanged: (_isFavorite) {
+                      final docUser = FirebaseFirestore.instance.collection('user').doc('${widget.product.id}');
+                      final docUser2 = FirebaseFirestore.instance.collection('favoritos').doc('${widget.product.id}');
+                      if(data.docs[widget.product.id]['favorite']){
+                        docUser2.delete();
+                        docUser.update({
+                          'name' : 'prueba1',
+                          'favorite' : false,
+                        });
+                      }
+                      else{
+                        createUser2(name: "${widget.product.title}");
+                        docUser.update({
+                          'name' : 'prueba2',
+                          'favorite' : true,
+                        });
+                      }
+                      print('Is Favorite : $_isFavorite');
+                    },),
+                ),
+              ],
+            );
+
+
+            //Text("test ${data.docs[1]['name']}");
+
+          }),
+
         ],
       ),
     );
+  }
+  Future createUser2({required String name}) async{
+
+    final docUser = FirebaseFirestore.instance.collection('favoritos').doc('${widget.product.id}');
+
+    final json = {
+      "id" : docUser.id,
+      "name": widget.product.title,
+      "age": 21,
+      "birthday" : DateTime(2001, 7, 28),
+      "favorite" : true,
+
+    };
+
+    await docUser.set(json);
   }
 }

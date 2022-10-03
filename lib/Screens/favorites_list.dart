@@ -1,7 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
+import 'package:medayv11/Screens/Components/body.dart';
 
+import '../Last/favorite_last.dart';
+import '../Last/favorite_last2.dart';
+import '../Models/Product.dart';
 import '../Models/user.dart';
 
 class Favorites extends StatefulWidget {
@@ -12,14 +16,17 @@ class Favorites extends StatefulWidget {
 }
 
 class _FavoritesState extends State<Favorites> {
+
   final controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
 backgroundColor: Colors.orangeAccent,
       body:
 
       StreamBuilder<List<User>>(
+
         stream: readUsers(),
         builder: (context, snapshot){
           if(snapshot.hasError){
@@ -28,6 +35,7 @@ backgroundColor: Colors.orangeAccent,
           }
 
           else if(snapshot.hasData){
+
             final users= snapshot.data!;
             return
 
@@ -61,39 +69,43 @@ backgroundColor: Colors.orangeAccent,
 
 Widget buildUser(User user) => ListTile(
 
-  leading: FavoriteButton(
+   leading: Image.asset("assets/images/rest${user.id}.png",height: 50,
+     width: 50,  ),  // formato imagenes
+
+  onTap: () =>Navigator.push(context,
+      MaterialPageRoute(builder: (context) => FavoriteLast2(user: user,))),
+
+  trailing: IconButton(
+
+
+    icon: Icon(Icons.delete), onPressed: () {
+
+    final docUser2 = FirebaseFirestore.instance.collection('favoritos').doc('${user.id}');
+
+    final docUser = FirebaseFirestore.instance.collection('user').doc('${user.id}');
+    if(user.favorite){
+      docUser2.delete();
+      docUser.update({
+        'name' : 'prueba1',
+        'favorite' : false,
+      });
+    }
+    else{
+      docUser.update({
+        'name' : 'prueba2',
+        'favorite' : true,
+      });
+    }
 
 
 
-    isFavorite: ( user.favorite)  ,
-    // iconDisabledColor: Colors.white,
-    valueChanged: (_isFavorite) {
-      final docUser2 = FirebaseFirestore.instance.collection('favoritos').doc('${user.id}');
 
-      final docUser = FirebaseFirestore.instance.collection('user').doc('${user.id}');
-      if(user.favorite){
-        docUser2.delete();
-docUser.update({
-  'name' : 'prueba1',
-  'favorite' : false,
-});
-      }
-      else{
-        docUser.update({
-          'name' : 'prueba2',
-          'favorite' : true,
-        });
-      }
-
-
-
-      print('Is Favorite : $_isFavorite');
-    },
+  },
   ),
 
 
   title: Text(user.name),
-  subtitle: Text(user.birthday.toIso8601String()),
+ // subtitle: Text(user.birthday.toIso8601String()),
 );
 
   Widget favoo(User user) => Container(
