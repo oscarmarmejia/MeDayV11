@@ -6,6 +6,10 @@ class User{
   final int age;
   final DateTime birthday;
   final bool favorite;
+  final String color;
+  final int color1;
+  final int color2;
+  final int color3;
 
 
   User({
@@ -14,6 +18,10 @@ required this.name,
 required this.age,
 required this.birthday,
     required this.favorite,
+    required this.color,
+    required this.color1,
+    required this.color2,
+    required this.color3,
 
 
 });
@@ -25,6 +33,10 @@ required this.birthday,
     'age': age,
     'birthday':birthday,
     'favorite':favorite,
+    'color':color,
+    'color1':color1,
+    'color2':color2,
+    'color3':color3,
 
 
 
@@ -36,6 +48,10 @@ name : json['name'],
     age : json['age'],
     birthday: (json['birthday'] as Timestamp).toDate(),
     favorite: json['favorite'],
+    color:json['color'],
+      color1:json['color1'],
+  color2:json['color2'],
+  color3:json['color3'],
 
 
 

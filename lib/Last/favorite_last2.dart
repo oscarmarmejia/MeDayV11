@@ -28,6 +28,7 @@ class FavoriteLast2 extends StatefulWidget {
 
 class _FavoriteLast2State extends State<FavoriteLast2> {
 
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -45,7 +46,7 @@ class _FavoriteLast2State extends State<FavoriteLast2> {
         ),
 
       ),
-      backgroundColor: Colors.blue,
+      backgroundColor: Color.fromRGBO(widget.user.color1, widget.user.color2, widget.user.color3, 0.5),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -55,7 +56,7 @@ class _FavoriteLast2State extends State<FavoriteLast2> {
                 fit: StackFit.loose,
                 children:<Widget> [
 
-                  //ProductImage2(user : users),
+                  ProductImage2(user: widget.user   ),
                   Container(
                     margin: EdgeInsets.only(top: size.height * 0.35 ),
                     padding: EdgeInsets.only(top: size.height * 0.2, left: kDefaultPaddin, right: kDefaultPaddin),

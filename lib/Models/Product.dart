@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class Product {
   final String image, title, description, url;
-  final int price, size, id;
+  final int price, size, id, color1, color2, color3;
   final Color color;
   final bool favorite;
   Product({
@@ -16,6 +16,9 @@ class Product {
     required this.color,
     required this.url,
     required this.favorite,
+    required this.color1,
+    required this.color2,
+    required this.color3,
   });
 }
 
@@ -29,7 +32,14 @@ List<Product> products = [
     description: dummyText,
     image: "assets/images/rest0.png",
     color: Color(0xFF3D82AE),
-    url:'https://www.arbys.com/deals/',),
+    url:'https://www.arbys.com/deals/',
+  color1: 0,
+    color2: 0,
+    color3: 250,
+
+
+
+  ),
   Product(
     favorite: false,
     id: 1,
@@ -39,7 +49,10 @@ List<Product> products = [
     description: dummyText,
     image: "assets/images/rest1.png",
     color: Color(0xFFD3A984),
-    url: 'https://www.redlobster.com/rewards',),
+    url: 'https://www.redlobster.com/rewards',
+    color1: 0,
+    color2: 0,
+    color3: 250,),
   Product(
     favorite: false,
     id: 2,
@@ -49,7 +62,10 @@ List<Product> products = [
     description: dummyText,
     image: "assets/images/rest2.png",
     color: Color(0xFF989493),
-    url: "https://www.redrobin.com/rewards",),
+    url: "https://www.redrobin.com/rewards",
+    color1: 0,
+    color2: 0,
+    color3: 250,),
   Product(
       favorite: false,
       id: 3,
@@ -59,7 +75,10 @@ List<Product> products = [
       description: dummyText,
       image: "assets/images/rest3.png",
       color: Color(0xFFE6B398),
-      url: "https://www.applebees.com/en/sign-up"),
+      url: "https://www.applebees.com/en/sign-up",
+    color1: 150,
+    color2: 15,
+    color3: 150,),
   Product(
       favorite: false,
       id: 4,
@@ -69,7 +88,10 @@ List<Product> products = [
       description: dummyText,
       image: "assets/images/rest4.png",
       color: Color(0xFFFB7883),
-      url: "http://aubonpain.fbmta.com/members/UpdateProfile.aspx?Action=Subscribe&_Theme=21474836609&inputsource=w"),
+      url: "http://aubonpain.fbmta.com/members/UpdateProfile.aspx?Action=Subscribe&_Theme=21474836609&inputsource=w",
+    color1: 0,
+    color2: 250,
+    color3: 0,),
   Product(
       favorite: false,
       id: 5,
@@ -79,7 +101,10 @@ List<Product> products = [
       description: dummyText,
       image: "assets/images/rest5.png",
       color: Color(0xFFAEAEAE),
-      url: "https://www.bajafresh.com/clubbaja/"
+      url: "https://www.bajafresh.com/clubbaja/",
+    color1: 0,
+    color2: 250,
+    color3: 0,
   ),
   Product(
       favorite: false,
@@ -90,7 +115,10 @@ List<Product> products = [
       description: dummyText,
       image: "assets/images/rest6.png",
       color: Color(0xFFD3A984),
-      url: "https://www.johnnyrockets.com/promotions/rocket-eclub"
+      url: "https://www.johnnyrockets.com/promotions/rocket-eclub",
+    color1: 0,
+    color2: 250,
+    color3: 0,
   ),
   Product(
       favorite: false,
@@ -101,7 +129,10 @@ List<Product> products = [
       description: dummyText,
       image: "assets/images/rest7.png",
       color: Color(0xFFAEAEAE),
-      url: "https://www.noodles.com/rewards/"
+      url: "https://www.noodles.com/rewards/",
+    color1: 250,
+    color2: 0,
+    color3: 0,
   ),
   Product(
       favorite: false,
@@ -112,7 +143,10 @@ List<Product> products = [
       description: dummyText,
       image: "assets/images/rest8.png",
       color: Color(0xFF3D82AE),
-      url: "http://aubonpain.fbmta.com/members/UpdateProfile.aspx?Action=Subscribe&_Theme=21474836609&inputsource=w"
+      url: "http://aubonpain.fbmta.com/members/UpdateProfile.aspx?Action=Subscribe&_Theme=21474836609&inputsource=w",
+    color1: 250,
+    color2: 0,
+    color3: 0,
   ),
   Product(
       favorite: false,
@@ -123,7 +157,10 @@ List<Product> products = [
       description: dummyText,
       image: "assets/images/rest9.png",
       color: Color(0xFFD3A984),
-      url: "https://www.papaginos.com/rewards"
+      url: "https://www.papaginos.com/rewards",
+    color1: 250,
+    color2: 0,
+    color3: 0,
   ),
 
 ];

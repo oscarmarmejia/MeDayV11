@@ -292,9 +292,14 @@ Stream<QuerySnapshot> users = FirebaseFirestore.instance.collection('user').snap
     final json = {
       "id" : docUser.id,
       "name": widget.product.title,
-      "age": 21,
+      "age": 33,
       "birthday" : DateTime(2001, 7, 28),
       "favorite" : true,
+      "color1" : widget.product.color1,
+      "color2" : widget.product.color2,
+      "color3" : widget.product.color3,
+      "color" : "prueba"
+
 
     };
 
