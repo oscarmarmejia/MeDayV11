@@ -69,14 +69,14 @@ class _ItemCardState extends State<ItemCard> {
                       final docUser = FirebaseFirestore.instance.collection('user').doc('${widget.product.id}');
                       final docUser2 = FirebaseFirestore.instance.collection('favoritos').doc('${widget.product.id}');
                       if(data.docs[widget.product.id]['favorite']){
-                        docUser2.delete();
+                       docUser2.delete();
                         docUser.update({
                           'name' : 'prueba1',
                           'favorite' : false,
                         });
                       }
                       else{
-                        createUser2(name: "${widget.product.title}");
+                        createUser2(name: widget.product.title);
                         docUser.update({
                           'name' : 'prueba2',
                           'favorite' : true,
@@ -110,7 +110,8 @@ class _ItemCardState extends State<ItemCard> {
       "color1" : widget.product.color1,
       "color2" : widget.product.color2,
       "color3" : widget.product.color3,
-      "color" : "prueba"
+      "color" : "prueba",
+     "description" : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since. When an unknown printer took a galley."
 
     };
 

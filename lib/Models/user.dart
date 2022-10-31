@@ -10,6 +10,11 @@ class User{
   final int color1;
   final int color2;
   final int color3;
+  final String description;
+  final int color4;
+  final double colorOp;
+  final String urlimage;
+
 
 
   User({
@@ -22,6 +27,11 @@ required this.birthday,
     required this.color1,
     required this.color2,
     required this.color3,
+   required this.description,
+   required this.color4,
+    required this.colorOp,
+   required this.urlimage
+
 
 
 });
@@ -37,6 +47,11 @@ required this.birthday,
     'color1':color1,
     'color2':color2,
     'color3':color3,
+    'description':description,
+    'color4' : color4,
+    'colorOp' : colorOp,
+   'urlimage': urlimage
+
 
 
 
@@ -52,6 +67,11 @@ name : json['name'],
       color1:json['color1'],
   color2:json['color2'],
   color3:json['color3'],
+    description: json['description'],
+ color4 : json['color4'],
+      colorOp: json['colorOp'],
+   urlimage: json['urlimage']
+
 
 
 

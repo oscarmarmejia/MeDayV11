@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:medayv11/Constants.dart';
 import 'package:medayv11/Models/Product.dart';
@@ -43,23 +44,7 @@ class Body extends StatelessWidget {
 
             itemBuilder: (context, index)=> ItemCard( product : products[index],
 
-/*
-            press: () => Navigator.push(
-              context, PageRouteBuilder(transitionDuration: Duration(milliseconds: 1500),
-                pageBuilder: (context, animation, animationTime ) =>
-                    DetailScreen(product: products[index]),
-              transitionsBuilder: (context, animation, animationTime, child){
-                animation = CurvedAnimation(parent: animation, curve: );
-                return ScaleTransition(scale: animation, alignment: Alignment.center, child: child,);
 
-              }
-
-            )
-            )) ),),
-
-
-
- */
                   press: () => Navigator.of(context).push(CustomPageRoute(FavoriteLast(product: products[index])))
                // press: () => Navigator.of(context).push(CustomPageRoute(DetailScreen(product: products[index])))
                    )
@@ -181,6 +166,11 @@ class _TransitionListTile extends StatelessWidget {
       subtitle: Text(subtitle),
     );
   }
+
+
+  //Stream<List<User>> readUsers() => FirebaseFirestore.instance.collection('favoritos').snapshots().map((snapshot) => snapshot.docs.map((doc) => User.fromJson(doc.data())).toList());
+
+
 }
 
 class CustomPageRoute<T> extends PageRoute<T> {

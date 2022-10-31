@@ -41,20 +41,11 @@ class ProductImage2 extends StatelessWidget {
             mainAxisAlignment : MainAxisAlignment.center,
 
             children: <Widget>[
-              RichText(text: TextSpan(
-                  children: [
-                    TextSpan(text: ""), TextSpan(text: "\$${user.name}",
-                      style: Theme.of(context).textTheme
-                          .headline4?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
 
-                  ]
-              ),
-              ),
 
               Container( width: 200, height: 200,
                   child: Expanded(child:
-                  Image.asset("assets/images/rest${user.id}.png", fit: BoxFit.fill, )
+                  Image.network(user.color, fit: BoxFit.fill, )
                 // child: Expanded(child: Image("assets/images/rest${user.id}.png"), fit: BoxFit.fill,),
 
 

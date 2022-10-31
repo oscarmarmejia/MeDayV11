@@ -5,6 +5,7 @@ import 'package:medayv11/Screens/Components/body.dart';
 
 import '../Last/favorite_last.dart';
 import '../Last/favorite_last2.dart';
+import '../Last/favorite_last22.dart';
 import '../Models/Product.dart';
 import '../Models/user.dart';
 
@@ -22,7 +23,7 @@ class _FavoritesState extends State<Favorites> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-backgroundColor: Colors.orangeAccent,
+      backgroundColor: Colors.orangeAccent,
       body:
 
       StreamBuilder<List<User>>(
@@ -30,7 +31,7 @@ backgroundColor: Colors.orangeAccent,
         stream: readUsers(),
         builder: (context, snapshot){
           if(snapshot.hasError){
-       return Text('something went wrong! ${snapshot.error}' );
+            return Text('something went wrong! ${snapshot.error}' );
 
           }
 
@@ -39,18 +40,19 @@ backgroundColor: Colors.orangeAccent,
             final users= snapshot.data!;
             return
 
-          Column(
-            children: [
-              Container(
-                width: 400,
-                height: 569,
-                child: ListView(
-                    children: users.map(buildUser).toList()
-                  ),
-              ),
+              Column(
+                children: [
+                  Container(
+                    width: 400,
+                    height: 569,
 
-            ],
-          );
+                    child: ListView(
+                        children: users.map(buildUser).toList()
+                    ),
+                  ),
+
+                ],
+              );
           }
 
           else{
@@ -63,53 +65,61 @@ backgroundColor: Colors.orangeAccent,
         },
       ),
 
-      
+
     );
   }
 
-Widget buildUser(User user) => ListTile(
+  Widget buildUser(User user) => ListTile(
 
-   leading: Image.asset("assets/images/rest${user.id}.png",height: 50,
-     width: 50,  ),  // formato imagenes
+    leading:
 
-  onTap: () =>Navigator.push(context,
-      MaterialPageRoute(builder: (context) => FavoriteLast2(user: user,))),
+    Image.network(user.color,height: 50, width: 50,  ),  // formato imagenes
 
-  trailing: IconButton(
+   onTap: () =>Navigator.push(context, MaterialPageRoute(builder: (context) => FavoriteLast22(user: user,))),
 
-
-    icon: Icon(Icons.delete), onPressed: () {
-
-    final docUser2 = FirebaseFirestore.instance.collection('favoritos').doc('${user.id}');
-
-    final docUser = FirebaseFirestore.instance.collection('user').doc('${user.id}');
-    if(user.favorite){
-      docUser2.delete();
-      docUser.update({
-        'name' : 'prueba1',
-        'favorite' : false,
-      });
-    }
-    else{
-      docUser.update({
-        'name' : 'prueba2',
-        'favorite' : true,
-      });
-    }
+    trailing: IconButton(
 
 
+      icon: Icon(Icons.delete), onPressed: () {
+
+        final docUser2 = FirebaseFirestore.instance.collection('favoritos').doc('${user.id}');
+
+      final docUser = FirebaseFirestore.instance.collection('prueba1').doc('${user.id}');
+      if(user.favorite){
+        docUser2.delete();
+        docUser.update({
+          'name' : 'prueba1',
+          'favorite' : false,
+        });
+      }
+      else{
+        docUser.update({
+          'name' : 'prueba2',
+          'favorite' : true,
+        });
+      }
 
 
-  },
-  ),
 
 
-  title: Text(user.name),
- // subtitle: Text(user.birthday.toIso8601String()),
-);
+
+
+    },
+    ),
+
+
+
+
+
+
+
+
+    title: Text(user.name),
+    //subtitle: Text(user.birthday.toIso8601String()),
+  );
 
   Widget favoo(User user) => Container(
-    child: Text(user.birthday.toIso8601String())
+      child: Text(user.birthday.toIso8601String())
 
   );
 
@@ -120,7 +130,7 @@ Widget buildUser(User user) => ListTile(
   Stream<List<User>> readUsers() => FirebaseFirestore.instance.collection('favoritos').snapshots().map((snapshot) => snapshot.docs.map((doc) => User.fromJson(doc.data())).toList());
 
   Future createUser({required String name}) async{
-    
+
     final docUser = FirebaseFirestore.instance.collection('user').doc('2');
 
     final json = {
@@ -135,4 +145,3 @@ Widget buildUser(User user) => ListTile(
     await docUser.set(json);
   }
 }
-

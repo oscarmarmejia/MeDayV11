@@ -1,8 +1,8 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:medayv11/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../Constants.dart';
@@ -11,31 +11,26 @@ import '../Models/user.dart';
 import '../Screens/Components/ProductImage.dart';
 import '../Screens/Components/ProductImage2.dart';
 
-
-
-
-
-
-class FavoriteLast2 extends StatefulWidget {
-
+class FavoriteLastTestDB extends StatefulWidget {
+  //final Product product;
   final User user;
-
-  const FavoriteLast2({Key? key, required this.user}) : super(key: key);
+  const FavoriteLastTestDB({Key? key, required this.user, }) : super(key: key);
 
   @override
-  State<FavoriteLast2> createState() => _FavoriteLast2State();
+  State<FavoriteLastTestDB> createState() => _FavoriteLastTestDBState();
 }
 
-class _FavoriteLast2State extends State<FavoriteLast2> {
+class _FavoriteLastTestDBState extends State<FavoriteLastTestDB> {
+
 
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    return
-
-       Scaffold(
+    return WillPopScope(
+      onWillPop: onWillPop,
+      child: Scaffold(
 
 
         appBar: AppBar(
@@ -48,7 +43,7 @@ class _FavoriteLast2State extends State<FavoriteLast2> {
           ),
 
         ),
-        backgroundColor: Color.fromRGBO(widget.user.color1, widget.user.color2, widget.user.color3, 0.5),
+        backgroundColor: Color.fromRGBO(widget.user.color1, widget.user.color2, widget.user.color3, widget.user.colorOp),
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
@@ -58,7 +53,7 @@ class _FavoriteLast2State extends State<FavoriteLast2> {
                   fit: StackFit.loose,
                   children:<Widget> [
 
-                    ProductImage2(user: widget.user   ),
+                    ProductImage2(user: widget.user),
                     Container(
                       margin: EdgeInsets.only(top: size.height * 0.35 ),
                       padding: EdgeInsets.only(top: size.height * 0.2, left: kDefaultPaddin, right: kDefaultPaddin),
@@ -93,47 +88,41 @@ class _FavoriteLast2State extends State<FavoriteLast2> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           SizedBox(height: size.height* 0.95,
-                              
-
-                              /*
-                              child: FavoriteButton(
-
-                                isFavorite: widget.user.favorite,
-
-
-
-                                valueChanged: (isFavorite)  {
-                                  final docUser = FirebaseFirestore.instance.collection('prueba1').doc(widget.user.id);
-                                  final docUser2 = FirebaseFirestore.instance.collection('favoritos').doc('${widget.user.age}');
-                                  if(widget.user.favorite){
-                                    docUser2.delete();
-
-                                    docUser.update({
-                                      'name' : 'prueba1',
-                                      'favorite' : false,
 
 
 
 
-
-                                    });
-                                  }
-                                  else{
-                                    createUser2(name: widget.user.name);
+                            child: FavoriteButton(
 
 
-                                    docUser.update({
-                                      'name' : 'prueba2',
-                                      'favorite' : true,
-                                    });
 
 
-                                  }
-                                  print('Is Favorite : $isFavorite');
-                                },
+                              isFavorite: widget.user.favorite,
 
-                                ),
-                            */
+
+
+                              valueChanged: (_isFavorite) {
+                                final docUser2 = FirebaseFirestore.instance.collection('favoritos').doc('${widget.user.age}');
+
+                                if(widget.user.favorite){
+                                  docUser2.delete();
+
+                                }
+                                else {
+                                  createUser2(name: widget.user.name);
+                                }
+                                var docUser = FirebaseFirestore.instance.collection('prueba1').doc('${widget.user.age}');
+
+                                  docUser.update({
+
+                                    'favorite' : _isFavorite,
+                                  });
+
+                                print('Is Favorite : $_isFavorite');
+                              },
+                            ),
+
+
                           ),
                         ],
                       );
@@ -208,7 +197,7 @@ class _FavoriteLast2State extends State<FavoriteLast2> {
 
                           onPressed: () async =>{
 
-                          //  await launch(widget.product.url)
+                            await launch(widget.user.urlimage)
 
                           },
 
@@ -229,21 +218,19 @@ class _FavoriteLast2State extends State<FavoriteLast2> {
         ),
 
 
-      );
+      ),
+    );
   }
-
 
   Widget buildUser(User user) => ListTile(
     leading: FavoriteButton(
       isFavorite: ( user.favorite)  ,
       // iconDisabledColor: Colors.white,
       valueChanged: (_isFavorite) {
-        final docUser = FirebaseFirestore.instance.collection('prueba1').doc(user.id);
-        final docUser2 = FirebaseFirestore.instance.collection('favoritos').doc('${user.id}');
+        final docUser = FirebaseFirestore.instance.collection('user').doc('my-id');
         if(user.favorite){
-          docUser2.delete();
-          docUser.update({
 
+          docUser.update({
             'name' : 'prueba1',
             'favorite' : false,
           });
@@ -304,10 +291,10 @@ class _FavoriteLast2State extends State<FavoriteLast2> {
     final json = {
       "id" : docUser.id,
       "name": name,
-      "age": 21,
-      "birthday" : DateTime(2001, 7, 28),
+      "age": 49,
+      "birthday" : DateTime(2001, 7, 22),
       "favorite" : false,
-
+      "color" : widget.user.color
     };
 
     await docUser.set(json);
@@ -315,14 +302,21 @@ class _FavoriteLast2State extends State<FavoriteLast2> {
 
   Future createUser2({required String name}) async{
 
-    final docUser = FirebaseFirestore.instance.collection('favoritos').doc();
+    final docUser = FirebaseFirestore.instance.collection('favoritos').doc(widget.user.id);
 
     final json = {
-      "id" : docUser.id,
-      "name": "",
-      "age": 21,
-      "birthday" : DateTime(2001, 7, 28),
+      "id" : widget.user.id,
+      "name": widget.user.name,
+      "age": 33,
+      "birthday" : DateTime(2001, 7, 29),
       "favorite" : true,
+      "color1" : widget.user.color1,
+      "color2" : widget.user.color2,
+      "color3" : widget.user.color3,
+      "color" : widget.user.color,
+      'description' : "0Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since. When an unknown printer took a galley.",
+
+
 
     };
 
@@ -331,6 +325,13 @@ class _FavoriteLast2State extends State<FavoriteLast2> {
 
 
 
+
+  Future<bool> onWillPop() async {
+
+
+    return true;
+
+  }
 }
 
 

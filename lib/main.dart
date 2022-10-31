@@ -11,6 +11,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:medayv11/Screens/test_login.dart';
 
 import 'Last/favorite_last.dart';
+
 import 'Screens/favorites_list.dart';
 
 
@@ -36,6 +37,10 @@ class _GoogleSignInAppState extends State<GoogleSignInApp> {
     GoogleSignInAccount? user = _googleSignIn.currentUser;
 
     return MaterialApp(
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          unselectedWidgetColor: Colors.transparent, // <-- your color
+        ),
       home:Scaffold(
         appBar:  AppBar(title: Text('Google Sign In (Sign '+ (user == null  ?  'out': 'in' ) + ")" ),
 
